@@ -1,0 +1,272 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Base layout */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f8f9;
+  color: #1b1b1f;
+}
+
+.app {
+  width: 100%;
+  max-width: 520px;
+  padding: 24px 18px 24px;
+}
+
+/* Header: logo above title, centered */
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 46px;
+  height: 46px;
+}
+
+.logo-text h1 {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  letter-spacing: 0.11em;
+}
+
+.tagline {
+  font-size: 0.88rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Main layout */
+
+.app-main {
+  margin-bottom: 16px;
+}
+
+.wheel-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Wheel – light, modern, casino slot feel */
+
+.wheel {
+  width: 240px;
+  height: 120px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #ffffff, #eef4f1);
+  border: 1px solid rgba(79, 127, 106, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  color: #15151b;
+  box-shadow: 0 18px 50px rgba(79, 127, 106, 0.22);
+}
+
+.wheel::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Result box */
+
+.drink-box {
+  width: 280px;
+  min-height: 96px;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(79, 127, 106, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px 16px;
+  gap: 4px;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+}
+
+.drink-main {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.drink-sub {
+  font-size: 0.86rem;
+  color: #666975;
+}
+
+/* Button – darker, more obvious during spin */
+
+.spin-button {
+  margin-top: 4px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #4f7f6a, #8fbfa5);
+  color: #0b1410;
+  box-shadow: 0 14px 32px rgba(79, 127, 106, 0.45);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+}
+
+.spin-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 8px 20px rgba(79, 127, 106, 0.45);
+}
+
+.spin-button.disabled {
+  opacity: 0.7;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+  animation: buttonPulse 0.6s ease-in-out infinite alternate;
+}
+
+/* Copy around the button */
+
+.rules-note {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  opacity: 0.78;
+  text-align: center;
+}
+
+.app-footer {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  opacity: 0.7;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Time-based mood shifts – subtle */
+
+body.state-morning {
+  background: #f0f6f3;
+}
+
+body.state-day {
+  background: #f7f8f9;
+}
+
+body.state-night {
+  background: #e4ebe7;
+}
+
+/* Spin + blur animation */
+
+.wheel.spinning {
+  animation: spinBlur 0.4s linear infinite;
+  filter: blur(6px);
+  color: transparent;
+}
+
+.drink-box.spinning {
+  animation: subtleFloat 0.9s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+@keyframes spinBlur {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes subtleFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Button pulse */
+
+@keyframes buttonPulse {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 10px 26px rgba(79, 127, 106, 0.4);
+  }
+  100% {
+    transform: translateY(1px) scale(0.99);
+    box-shadow: 0 6px 16px rgba(79, 127, 106, 0.3);
+  }
+}
+
+/* Party YES */
+
+body.party-celebrate {
+  animation: partyWash 1.4s ease-out;
+}
+
+body.party-celebrate .wheel {
+  background: radial-gradient(circle at top, #ffe8b3, #ffcf99, #ffffff);
+  box-shadow: 0 22px 60px rgba(249, 168, 51, 0.55);
+}
+
+body.party-celebrate .drink-box {
+  box-shadow: 0 18px 50px rgba(249, 168, 51, 0.4);
+}
+
+@keyframes partyWash {
+  0% { background: #f7f8f9; }
+  40% { background: #fff7e5; }
+  100% { background: #f7f8f9; }
+}
+
+/* Result emphasis */
+
+.drink-box.wiggle {
+  animation: wiggle 0.55s ease;
+}
+
+@keyframes wiggle {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+.drink-box.highlight {
+  animation: highlightPulse 0.7s ease-out;
+}
+
+@keyframes highlightPulse {
+  0% { transform: scale(1); box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12); }
+  50% { transform: scale(1.03); box-shadow: 0 22px 60px rgba(143, 191, 165, 0.55); }
+  100% { transform: scale(1); box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12); }
+}
